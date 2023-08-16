@@ -48,7 +48,7 @@ class DB:
         except NoResultFound:
             raise
 
-    def update_user(self, ser_id: int, **kwargs) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """method will use find_user_by to locate the user to update"""
         user = self.find_user_by(id=user_id)
         for i, j in kwargs.items():
