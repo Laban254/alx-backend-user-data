@@ -18,7 +18,7 @@ def index():
 def users() -> str:
     """post  a user"""
     email = request.form.get("email")
-    password = request.form.get("passwor")
+    password = request.form.get("password")
     try:
         AUTH.register_user(email, password)
         return jsonify({"email": f"{email}", "message": "user created"}), 200
