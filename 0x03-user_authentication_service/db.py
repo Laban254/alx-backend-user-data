@@ -47,3 +47,12 @@ class DB:
             return self._session.query(User).filter_by(**kwargs).one()
         except NoResultFound:
             raise
+
+    def update_user(user_id: int, **kwargs) -> None:
+        """method will use find_user_by to locate the user to update"""
+        user = self.find_user_by(id=user_id)
+        for i, j in kwargs.items():
+            if i not in VALID:
+                raise ValueError
+            setattr(user, i, j)
+        self._session.commit()
