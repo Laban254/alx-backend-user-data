@@ -39,10 +39,10 @@ class Auth:
             return False
         return bcrypt.checkpw(password.encode("utf=8"), user.hashed_password)
 
-    def _generate_uuid() -> str:
+    def _generate_uuid():
         """Generate a new UUID and return its string representation.
         This function is private to the auth module and should not
         be used outside of it.
         """
         new_uuid = uuid.uuid4()
-        return new_uuid
+        return str(new_uuid)
