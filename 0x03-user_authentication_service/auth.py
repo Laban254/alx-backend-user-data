@@ -16,6 +16,14 @@ def _hash_password(password: str) -> bytes:
     hashed = bcrypt.hashpw(bytes_pw, salt)
     return hashed
 
+def _generate_uuid() -> str:
+        """Generate a new UUID and return its string representation.
+        This function is private to the auth module and should not
+        be used outside of it.
+        """
+        new_uuid = uuid.uuid4()
+        return str(new_uuid)
+
 
 class Auth:
     """Auth class to interact with the authentication database."""
@@ -38,11 +46,3 @@ class Auth:
         except NoResultFound:
             return False
         return bcrypt.checkpw(password.encode("utf=8"), user.hashed_password)
-
-    def _generate_uuid():
-        """Generate a new UUID and return its string representation.
-        This function is private to the auth module and should not
-        be used outside of it.
-        """
-        new_uuid = uuid.uuid4()
-        return str(new_uuid)
