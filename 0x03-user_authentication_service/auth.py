@@ -47,3 +47,18 @@ class Auth:
         except NoResultFound:
             return False
         return bcrypt.checkpw(password.encode("utf=8"), user.hashed_password)
+
+    def create_session(self, email: str) -> str:
+        """Create a new session for the user corresponding to the given email.
+        Args:
+            email (str): The email of the user.
+        Returns:
+            str: The session ID.
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+            session_id = _generate_uuid()
+            self._db.update_user(user.id, session_id=session_id)
+            return session_id
+        except NoResultFound:
+            return
